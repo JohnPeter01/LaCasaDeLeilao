@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Produtos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor ="let produto of produtos">
+      <ion-thumbnail item-start>
+        <img src="data:image/jpg;base64,{{produto.foto}}">
+      </ion-thumbnail>
+      <h2>{{produto.nome}}</h2>
+      <p>Valor: {{produto.valorAtual}}</p>
+      <button ion-button clear item-end (click)="navegar(produto)">Vizualizar</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

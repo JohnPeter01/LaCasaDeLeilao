@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>  
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Produto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <h1>{{produto.nome}}</h1>
+    </ion-card-header>
+
+    <ion-item>
+      <h2>Valor Atual: </h2> {{produto.valorAtual}}
+      <h2>Lance Minimo: </h2>{{produto.incOmissao}}
+   </ion-item>
+
+   <ion-item>
+      <img src="data:image/jpg;base64,{{produto.foto}}">
+   </ion-item>
+
+    <div [ngSwitch]="produto.estado">
+      <div *ngSwitchCase = "'ABERTO'">
+        <form [formGroup]="formGroup" (ngSubmit)="RealizaOferta(formGroup.value.oferta,produto.id)" >
+          <ion-item>
+            <h2>Maior Oferta:</h2>
+          </ion-item>
+          <ion-item>
+            <ion-label>Oferta</ion-label>
+            <ion-input type="text" formControlName="oferta" (keypress)="AllowNumbersOnly($event)"></ion-input>
+          </ion-item>
+          <button ion-item block outline type="submit">
+              <ion-icon name="ios-trending-up" item-start></ion-icon>
+              Ofertar
+            </button>
+        </form>
+        <button ion-item block outline color="secondary" (click)="RealizaOfertaIncremento(produto.id)">
+            <ion-icon name="logo-steam" item-start></ion-icon>
+            Ofertar Incremento
+          </button>
+      </div>
+      <div *ngSwitchCase = "'FECHADO'">
+          <button ion-item block outline disabled> Negociações Encerradas.</button>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
+
+<!--
+<ion-card>
+    <ion-card-header>
+      {{produto.nome}}
+    </ion-card-header>
+
+    <h2>{{produto.valorAtual}}</h2>
+    <h2>{{produto.incOmissao}}</h2>
+    <div *ngSwitchCase = "'ABERTO'">
+      <form>
+        <ion-item>
+            <ion-label>Maior Oferta:{{produto.oferta}}</ion-label>
+            <ion-input type="text" (keypress)="AllowNumbersOnly($event)"></ion-input>
+          </ion-item>
+      <button ion-item block outline>
+        <ion-icon name="planet" item-start></ion-icon>
+        Ofertar
+      </button>
+      <button ion-item block outline>
+          <ion-icon name="ios-trending-up" item-start></ion-icon>
+          Ofertar Incremento
+        </button>
+      </form>
+      
+    <div *ngSwitchCase = "'FECHADO'">
+        <button ion-item block outline disabled> Negociações Encerradas.</button>
+    </div>
+</ion-card>
+-->
